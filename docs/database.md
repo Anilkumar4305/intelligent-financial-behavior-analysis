@@ -84,6 +84,30 @@ transactions
 │
 categories
 
+```mermaid
+erDiagram
+    USERS ||--o{ TRANSACTIONS : has
+    CATEGORIES ||--o{ TRANSACTIONS : classifies
+
+    USERS {
+        int user_id
+        string username
+        string email
+    }
+
+    TRANSACTIONS {
+        int transaction_id
+        date date
+        float amount
+        string description
+        string platform
+        string source
+    }
+
+    CATEGORIES {
+        int category_id
+        string name
+    }
 
 - One user can have multiple transactions.
 - Each transaction belongs to a single category.
@@ -113,28 +137,3 @@ categories
 
 This database design ensures a clean, scalable, and ethical foundation for financial behavior analysis, enabling seamless integration with backend APIs, AI categorization modules, and visualization dashboards.
 
-
-```mermaid
-erDiagram
-    USERS ||--o{ TRANSACTIONS : has
-    CATEGORIES ||--o{ TRANSACTIONS : classifies
-
-    USERS {
-        int user_id
-        string username
-        string email
-    }
-
-    TRANSACTIONS {
-        int transaction_id
-        date date
-        float amount
-        string description
-        string platform
-        string source
-    }
-
-    CATEGORIES {
-        int category_id
-        string name
-    }
