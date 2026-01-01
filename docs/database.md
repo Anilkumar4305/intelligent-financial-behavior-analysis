@@ -8,11 +8,11 @@ The project uses **MySQL**, an open-source relational database, due to its relia
 
 ## 2. Design Objectives
 
-- Store transaction data in a structured and normalized format
-- Support multiple data ingestion sources (CSV, Manual, SMS-style input)
-- Enable efficient querying for analysis and visualization
-- Ensure privacy-first and minimal data storage principles
-- Maintain scalability for future feature extensions
+- Store transaction data in a structured and normalized format  
+- Support multiple data ingestion sources (CSV, Manual, SMS-style input)  
+- Enable efficient querying for analysis and visualization  
+- Ensure privacy-first and minimal data storage principles  
+- Maintain scalability for future feature extensions  
 
 ---
 
@@ -74,45 +74,36 @@ The system consists of the following core tables:
 ---
 
 ## 7. Entity Relationship Diagram (ERD)
-
-users
-└── user_id
-│
-│
-transactions
-└── category_id
-│
-categories
-
 ```mermaid
 erDiagram
     USERS ||--o{ TRANSACTIONS : has
     CATEGORIES ||--o{ TRANSACTIONS : classifies
 
     USERS {
-        int user_id
+        int user_id PK
         string username
         string email
+        datetime created_at
     }
 
     TRANSACTIONS {
-        int transaction_id
+        int transaction_id PK
+        int user_id FK
+        int category_id FK
         date date
-        float amount
+        decimal amount
         string description
         string platform
         string source
+        datetime created_at
     }
 
     CATEGORIES {
-        int category_id
+        int category_id PK
         string name
+        string description
     }
-
-- One user can have multiple transactions.
-- Each transaction belongs to a single category.
-- Categories are global and reused across users.
-
+```
 ---
 
 ## 8. Data Flow Explanation
