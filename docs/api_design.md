@@ -94,15 +94,15 @@ The backend APIs are responsible for:
   "description": "Swiggy food order",
   "platform": "PhonePe"
 }
-
+```
 Response
-
+```json
 {
   "status": "success",
   "transaction_id": 102,
   "message": "Transaction stored successfully"
 }
-
+```
 
 ---
 
@@ -116,7 +116,10 @@ Response
 {
   "message": "Rs.1200 spent on Amazon via GPay on 10-08-2025"
 }
+```
 Response
+
+```json
 {
   "status": "success",
   "parsed_data": {
@@ -126,8 +129,9 @@ Response
     "date": "2025-08-10"
   }
 }
+```
 
-5. Validation Rules
+## 5. Validation Rules
 
 The backend enforces strict validation rules before processing any request:
 
@@ -143,13 +147,13 @@ Invalid or malformed requests are rejected
 
 Duplicate or inconsistent entries are flagged
 
-6. Error Handling Strategy
+Error Handling Strategy
 Status Code	Meaning
 400	Invalid request or validation error
 401	Unauthorized access
 404	Resource not found
 500	Internal server error
-7. Security & Privacy Considerations
+Security & Privacy Considerations
 
 No banking credentials are collected or stored
 
@@ -161,7 +165,7 @@ Stateless authentication mechanisms are used
 
 Data access is restricted strictly per user
 
-8. Summary
+## 8. Summary
 
 This API design ensures clean separation of concerns, scalability, and ethical data handling.
 It provides a robust foundation for integrating data ingestion, AI-based categorization, analytics, and visualization in a real-world financial behavior analysis system.

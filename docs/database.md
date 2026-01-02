@@ -104,6 +104,15 @@ erDiagram
         string description
     }
 ```
+**ERD Explanation:**
+
+- Each user can have multiple financial transactions (one-to-many relationship).
+- Every transaction is associated with exactly one user.
+- Each transaction is assigned to a single expense category.
+- Categories are predefined and shared across all users.
+- Primary keys (PK) uniquely identify each record.
+- Foreign keys (FK) enforce referential integrity between tables.
+
 ---
 
 ## 8. Data Flow Explanation
