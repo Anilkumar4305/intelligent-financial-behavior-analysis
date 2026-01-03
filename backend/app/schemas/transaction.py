@@ -1,0 +1,33 @@
+from pydantic import BaseModel, Field
+import datetime
+from typing import Optional
+
+
+class TransactionBase(BaseModel):
+    date: datetime.date = Field(..., example="2025-08-12")
+    amount: float = Field(..., gt=0, example=450.0)
+    description: str = Field(..., example="Swiggy food order")
+    platform: str = Field(..., example="PhonePe")
+
+
+class TransactionCreate(TransactionBase):
+    """
+    Schema used when creating a new transaction
+    """
+    pass
+
+
+class TransactionResponse(TransactionBase):
+    """
+    Schema returned to the client
+    """
+    id: int
+    source: Optional[str] = "manual"
+
+    # Phase 3.1 – AI classification output
+    category: str
+    confidence: float
+    classification_method: str
+
+    class Config:
+        from_attributes = True
