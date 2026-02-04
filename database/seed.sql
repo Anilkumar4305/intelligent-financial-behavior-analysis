@@ -1,32 +1,20 @@
--- =========================================
--- Seed Data for Intelligent Financial
--- Behavior Analysis System
--- =========================================
-
 USE intelligent_finance_db;
 
 -- =========================================
--- Insert sample users
--- =========================================
-INSERT INTO users (username, email) VALUES
-('anil_kumar', 'anil@example.com');
-
--- =========================================
--- Insert sample categories
--- =========================================
-INSERT INTO categories (name, description) VALUES
-('Food', 'Food and dining expenses'),
-('Shopping', 'Online and offline purchases'),
-('Utilities', 'Electricity, water, recharge, etc.'),
-('Transport', 'Travel and fuel expenses');
-
--- =========================================
--- Insert sample transactions
+-- SAMPLE TRANSACTIONS
 -- =========================================
 INSERT INTO transactions
-(user_id, category_id, date, amount, description, platform, source)
+(date, amount, description, platform, source, category, confidence, classification_method)
 VALUES
-(1, 1, '2025-08-10', 1200.00, 'Amazon purchase', 'GPay', 'CSV'),
-(1, 1, '2025-08-11', 450.00, 'Swiggy food order', 'PhonePe', 'CSV'),
-(1, 3, '2025-08-12', 300.00, 'Mobile recharge', 'Paytm', 'SMS'),
-(1, NULL, '2025-08-13', 1500.00, 'Electricity bill', 'GPay', 'CSV');
+('2025-08-10', 1200.00, 'Amazon purchase', 'GPay', 'csv', 'SHOPPING', 0.85, 'rule-based'),
+('2025-08-11', 450.00, 'Swiggy food order', 'PhonePe', 'csv', 'FOOD', 0.90, 'rule-based'),
+('2025-08-12', 300.00, 'Mobile recharge', 'Paytm', 'sms', 'BILLS', 0.75, 'rule-based'),
+('2025-08-13', 1500.00, 'Electricity bill', 'GPay', 'csv', 'BILLS', 0.80, 'rule-based');
+
+-- =========================================
+-- SAMPLE BUDGETS
+-- =========================================
+INSERT INTO budgets (category, month, monthly_budget) VALUES
+('FOOD', '2025-08', 5000),
+('SHOPPING', '2025-08', 7000),
+('BILLS', '2025-08', 4000);

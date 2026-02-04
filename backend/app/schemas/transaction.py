@@ -22,12 +22,12 @@ class TransactionResponse(TransactionBase):
     Schema returned to the client
     """
     id: int
-    source: Optional[str] = "manual"
+    source: Optional[str] = None
 
     # Phase 3.1 – AI classification output
-    category: str
-    confidence: float
-    classification_method: str
+    category: Optional[str] = None
+    confidence: Optional[float] = None
+    classification_method: Optional[str] = None
 
     class Config:
         from_attributes = True

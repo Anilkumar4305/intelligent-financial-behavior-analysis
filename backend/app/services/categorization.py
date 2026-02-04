@@ -1,6 +1,6 @@
 from typing import Tuple
+import re
 
-# Rule-based keyword map (EXTENSIBLE)
 CATEGORY_RULES = {
     "FOOD": ["swiggy", "zomato", "restaurant", "food", "pizza", "burger"],
     "SHOPPING": ["amazon", "flipkart", "myntra", "shopping"],
@@ -10,22 +10,25 @@ CATEGORY_RULES = {
 }
 
 
-def categorize_transaction(description: str) -> Tuple[str, float, str]:
-    """
-    Categorize transaction description using rule-based logic.
-    Returns:
-        category (str)
-        confidence (float)
-        method (str)
-    """
+def clean_text(text: str) -> str:
+    text = text.lower()
+    text = re.sub(r"[^a-z0-9\s]", " ", text)
+    return re.sub(r"\s+", " ", text).strip()
 
-    description_lower = description.lower()
+
+def categorize_transaction(description: str) -> Tuple[str, float, str]:
+    if not description:
+        return "OTHER", 0.2, "rule-based"
+
+    description = clean_text(description)
+
+    best_match = ("OTHER", 0.2)
 
     for category, keywords in CATEGORY_RULES.items():
-        matches = sum(1 for keyword in keywords if keyword in description_lower)
-
+        matches = sum(1 for k in keywords if k in description)
         if matches > 0:
-            confidence = min(0.5 + (matches * 0.1), 0.95)
-            return category, round(confidence, 2), "rule-based"
+            confidence = min(0.5 + matches * 0.12, 0.95)
+            if confidence > best_match[1]:
+                best_match = (category, confidence)
 
-    return "OTHER", 0.4, "rule-based"
+    return best_match[0], round(best_match[1], 2), "rule-based"

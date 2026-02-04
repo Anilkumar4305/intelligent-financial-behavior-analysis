@@ -1,52 +1,57 @@
 -- =========================================
--- Database Schema for Intelligent Financial
--- Behavior Analysis System
+-- Intelligent Financial Behavior Analysis DB
+-- PRODUCTION-READY SCHEMA
 -- =========================================
 
--- Create database
 CREATE DATABASE IF NOT EXISTS intelligent_finance_db;
 USE intelligent_finance_db;
 
 -- =========================================
--- Table: users
+-- USERS
 -- =========================================
 CREATE TABLE IF NOT EXISTS users (
-    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(100) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 -- =========================================
--- Table: categories
--- =========================================
-CREATE TABLE IF NOT EXISTS categories (
-    category_id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL UNIQUE,
-    description TEXT
-);
-
--- =========================================
--- Table: transactions
+-- TRANSACTIONS (MATCHES SQLALCHEMY MODEL)
 -- =========================================
 CREATE TABLE IF NOT EXISTS transactions (
-    transaction_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    category_id INT NULL,
+    id INT AUTO_INCREMENT PRIMARY KEY,
+
     date DATE NOT NULL,
     amount DECIMAL(10,2) NOT NULL,
     description VARCHAR(255) NOT NULL,
     platform VARCHAR(50) NOT NULL,
-    source VARCHAR(20) NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT fk_user
-        FOREIGN KEY (user_id)
-        REFERENCES users(user_id)
-        ON DELETE CASCADE,
+    -- Source of transaction
+    source VARCHAR(20) DEFAULT 'manual',
 
-    CONSTRAINT fk_category
-        FOREIGN KEY (category_id)
-        REFERENCES categories(category_id)
-        ON DELETE SET NULL
+    -- AI Classification fields (CRITICAL)
+    category VARCHAR(100) NULL,
+    confidence FLOAT NULL,
+    classification_method VARCHAR(50) NULL,
+
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
+-- =========================================
+-- BUDGETS (REQUIRED FOR ANALYTICS)
+-- =========================================
+CREATE TABLE IF NOT EXISTS budgets (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    category VARCHAR(100) NOT NULL,
+    month VARCHAR(7) NOT NULL,  -- format: YYYY-MM
+    monthly_budget DECIMAL(10,2) NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- =========================================
+-- INDEXES FOR PERFORMANCE
+-- =========================================
+CREATE INDEX idx_transaction_date ON transactions(date);
+CREATE INDEX idx_transaction_category ON transactions(category);
+CREATE INDEX idx_budget_month ON budgets(month);

@@ -1,72 +1,169 @@
-# Intelligent Financial Behavior Analysis & Decision Support System
+# 🧠 AI Financial Behavior Intelligence Platform
 
-## 1. Project Overview
-This project aims to design and develop an intelligent system that analyzes personal digital transaction data and converts it into meaningful, explainable financial behavior insights while maintaining user privacy.
+An AI-powered financial analytics system that transforms raw transaction data into behavioral insights, financial health metrics, and risk intelligence.
 
----
-
-## 2. Problem Statement
-Individuals generate large volumes of digital payment transactions through platforms such as UPI-based systems and wallets. However, these raw transaction records do not provide actionable understanding of spending behavior. Existing tools primarily focus on expense tracking rather than behavioral analysis and decision support.
+> Built with a full-stack architecture combining **React**, **FastAPI**, **SQL**, and **AI-driven analytics logic**.
 
 ---
 
-## 3. Objectives
-- To automatically process transaction data from user-provided sources
-- To categorize expenses using intelligent methods
-- To analyze financial behavior patterns
-- To generate explainable insights for better financial decision-making
-- To ensure ethical and privacy-aware data handling
+## 🚀 Problem Statement
+
+Most expense trackers only store transactions.  
+They **don’t analyze behavior**, **detect risks**, or **provide financial intelligence**.
+
+This platform acts as a **financial behavior engine**, not just an expense tracker.
 
 ---
 
-## 4. System Architecture
-The system follows a modular architecture consisting of:
-- Data Ingestion Layer
-- Parsing and Normalization Layer
-- Categorization Engine
-- Behavioral Analysis Module
-- Insight Generation Module
-- Visualization and Reporting Interface
+## 💡 Solution
+
+This system ingests financial data from multiple sources and applies intelligent processing to:
+
+- Automatically categorize expenses
+- Calculate financial health score
+- Detect risk patterns
+- Compare budget vs actual spending
+- Generate behavioral recommendations
 
 ---
 
-## 5. Data Sources
-The system uses user-consented data from:
-- CSV transaction files
-- Manually entered transaction records
-- SMS-style transaction text (simulated input)
+## 🏗️ System Architecture
 
-No direct integration with banking or payment platforms is performed.
+```mermaid
+flowchart LR
+    A[Frontend - React Dashboard] -->|API Calls| B[FastAPI Backend]
+    B --> C[Service Layer]
+    C --> D[AI Categorization Engine]
+    C --> E[Analytics Engine]
+    C --> F[Budget Engine]
+    D --> G[(Database)]
+    E --> G
+    F --> G
+```
+## ⚙️ Tech Stack
+### Frontend
 
----
+- React + TypeScript
 
-## 6. Methodology
-The project applies data preprocessing, rule-based and machine learning-based categorization, and statistical analysis techniques to extract meaningful patterns from transaction data.
+- Recharts (Data Visualization)
 
----
+- Axios (API communication)
 
-## 7. Ethics & Privacy Considerations
-- No banking credentials are collected
-- No unauthorized data access is performed
-- All data processing is based on explicit user consent
-- The system complies with privacy-first design principles
+- Tailwind CSS
 
----
+### Backend
 
-## 8. Limitations
-- Real-time banking integration is not implemented
-- Categorization accuracy depends on data quality
-- The system does not provide financial advice
+- FastAPI
 
----
+- SQLAlchemy ORM
 
-## 9. Future Scope
-- Improved categorization using advanced NLP models
-- Mobile application integration
-- Enhanced financial forecasting features
-- Multi-language support
+- Pydantic Schemas
 
----
+- REST API Architecture
 
-## 10. Conclusion
-This project demonstrates the application of data-driven techniques and explainable analysis to address real-world financial behavior understanding in an ethical and privacy-conscious manner.
+- AI / Data Intelligence
+
+- Rule-based NLP categorization engine
+
+- Financial risk analysis logic
+
+- Behavioral scoring model
+
+- Aggregation analytics pipeline
+
+### Database
+
+- SQL (Mysql / Postgres-ready)
+
+## Key Features
+
+| Feature                   | Description                                        |
+| ------------------------- | -------------------------------------------------- |
+| 📂 CSV Upload             | Bulk transaction ingestion from files              |
+| 🧠 AI Categorization      | Smart expense classification with confidence score |
+| ❤️ Financial Health Score | Quantified financial behavior metric               |
+| ⚠️ Risk Alerts            | Detect overspending & abnormal patterns            |
+| 📊 Category Analytics     | Spending distribution insights                     |
+| 💰 Budget vs Actual       | Budget tracking intelligence                       |
+| 🤖 Recommendations        | Behavioral improvement suggestions                 |
+
+
+## 📊 Data Flow
+```mermaid
+sequenceDiagram
+    User->>Frontend: Upload CSV / Add Transaction
+    Frontend->>Backend: API Request
+    Backend->>Categorization Service: Classify Expense
+    Backend->>Database: Store Transaction
+    Backend->>Analytics Engine: Compute Metrics
+    Analytics Engine->>Backend: Insights
+    Backend->>Frontend: Dashboard Data
+```
+## AI Categorization Logic
+
+- Text cleaning & normalization
+
+- Keyword-based intelligent matching
+
+- Confidence scoring
+
+- Fallback classification
+
+#### Example:
+- "Swiggy food order" → FOOD (confidence: 0.74)
+
+
+## 📈 Dashboard Insights
+
+- Financial Health Score Gauge
+
+- Category-wise Spending Chart
+
+- Budget vs Actual Pie Chart
+
+- Risk Alerts Panel
+
+## How to Run
+## Backend
+- cd backend
+- pip install -r requirements.txt
+- uvicorn app.main:app --reload
+## Frontend
+- cd frontend
+- npm install
+- npm run dev
+
+## 📦 API Endpoints
+| Endpoint                   | Purpose                  |
+| -------------------------- | ------------------------ |
+| `/transactions/upload-csv` | Bulk transaction upload  |
+| `/transactions`            | Add or list transactions |
+| `/analytics/summary`       | Full financial insights  |
+| `/budgets`                 | Budget management        |
+
+
+## Engineering Highlights
+
+- ✔ Modular service-layer architecture
+- ✔ Clean API contracts
+- ✔ Scalable analytics pipeline
+- ✔ AI logic separated from routes
+- ✔ Frontend-backend integration
+- ✔ Production-style project structure
+
+## Future Improvements
+
+- ML-based expense prediction
+
+- Bank SMS auto parsing
+
+- Anomaly detection using ML
+
+- User authentication
+
+- Cloud deployment
+
+## Author
+
+### Anil Kumar Gundu
+Full Stack + AI Systems Developer
